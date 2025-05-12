@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planets - Astronomy Learning Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .planet-viewer {
+      width: 100%;
+      height: 500px;
+      background-color: #111;
+      margin-bottom: 50px;
+    }
+
+    nav {
+      background-color: #111;
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #ffffff;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ccc;
+    }
+
+    .planet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 0 5% 50px;
+    }
+
+    .planet-card {
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      padding: 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+    }
+
+    .planet-card:hover {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .planet-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .planet-details {
+      display: none;
+      margin-top: 10px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .footer {
+      background-color: #000;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    .solar_sys {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="text.html">Home</a>
+    <a href="constellations.html">Constellations</a>
+    <a href="planets.html">Planets</a>
+    <a href="quiz.html">Quizzes</a>
+    <a href="#">Events</a>
+    <a href="#">Resources</a>
+  </nav>
+
+  <header>
+    <h1>Planets of the Solar System</h1>
+    <p>Discover the eight planets that orbit our sun and more !</p>
+  </header>
+
+  <!-- 3D MODEL VIEWER PLACEHOLDER -->
+  <div class="planet-viewer">
+    <iframe src="https://eyes.nasa.gov/apps/orrery/#/" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div class="solar_sys">
+    <h1>OUR SOLAR SYSTEM 🌌</h1>
+  </div>
+
+  <section class="planet-grid">
+    <div class="planet-card" onclick="toggleDetails('mercury')">
+      <h3>Mercury</h3>
+      <div class="planet-details" id="mercury">
+        Mercury is the smallest planet and closest to the Sun. It has a rocky surface and no atmosphere.
+      </div>
+    </div>
+
+    <div class="planet-card" onclick="toggleDetails('venus')">
+      <h3>Venus</h3>
+      <div class="planet-details" id="venus">
+        Venus has a thick atmosphere of carbon dioxide and sulfuric acid clouds, making it the hottest planet.
+      </div>
+    </div>
+
+    <div class="planet-card" onclick="toggleDetails('earth')">
+      <h3>Earth</h3>
+      <div class="planet-details" id="earth">
+        Earth is the only planet known to support life. It has a diverse climate and liquid water on its surface.
+      </div>
+    </div>
+
+    <div class="planet-card" onclick="toggleDetails('mars')">
+      <h3>Mars</h3>
+      <div class="planet-details" id="mars">
+        Known as the Red Planet, Mars has the tallest volcano and the largest dust storms in the solar system.
+      </div>
+    </div>
+
+    <div class="planet-card" onclick="toggleDetails('jupiter')">
+      <h3>Jupiter</h3>
+      <div class="planet-details" id="jupiter">
+        Jupiter is the largest planet with a strong magnetic field and dozens of moons, including Ganymede.
+      </div>
+    </div>
+
+    <div class="planet-card" onclick="toggleDetails('saturn')">
+      <h3>Saturn</h3>
+      <div class="planet-details" id="saturn">
+        Saturn is best known for its stunning ring system and has over 80 known moons.
+      </div>
+    </div>
+
+    <div class="planet-card" onclick="toggleDetails('uranus')">
+      <h3>Uranus</h3>
+      <div class="planet-details" id="uranus">
+        Uranus rotates on its side and has a faint ring system. It is an ice giant with a cold atmosphere.
+      </div>
+    </div>
+
+    <div class="planet-card" onclick="toggleDetails('neptune')">
+      <h3>Neptune</h3>
+      <div class="planet-details" id="neptune">
+        Neptune is known for its deep blue color, strong winds, and the Great Dark Spot, a massive storm.
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    &copy; 2025 Astronomy Learning Platform — Explore the cosmos.
+  </div>
+
+  <script>
+    function toggleDetails(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+
+  <!-- ✅ SALE script for contrast toggle & layout -->
+  <script src="sale.js"></script>
+</body>
+</html>

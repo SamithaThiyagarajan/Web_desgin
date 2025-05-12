@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Astronomy Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #101010;
+      color: #fff;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0;
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #ff7b00;
+      border-bottom: 1px solid #333;
+    }
+
+    .quiz-container {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .question-side {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #101010;
+    }
+
+    .question {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    .timer, .progress {
+      font-size: 1.3em;
+      margin-bottom: 20px;
+    }
+
+    .option-side {
+      padding: 40px;
+      background-color: #2a2a2a;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 20px;
+    }
+
+    .answer-label {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .option {
+      background: #1e1e1e;
+      padding: 20px;
+      width: 100%;
+      border: 2px solid #555;
+      color: #fff;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      display: flex;
+      align-items: center;
+      border-radius: 0;
+    }
+
+    .option:hover {
+      background-color: #ff7b00;
+    }
+
+    .option input {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+
+    button {
+      padding: 15px;
+      background-color: #ff7b00;
+      color: #fff;
+      font-size: 1.4em;
+      border: none;
+      cursor: pointer;
+      margin-top: 30px;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f58600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 1em;
+      color: #aaa;
+      background-color: #101010;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #ff7b00;
+    }
+  </style>
+</head>
+<body>
+
+<header>Astronomy Quiz</header>
+
+<div class="quiz-container">
+  <!-- Left Side -->
+  <div class="question-side">
+    <div class="timer">Time Left: <span id="timer">30</span> seconds</div>
+    <div class="question" id="question">Question text here</div>
+    <div class="progress" id="progress">Question 1 of 10</div>
+  </div>
+
+  <!-- Right Side -->
+  <div class="option-side">
+    <div class="answer-label">Answer here:</div>
+    <div id="options"></div>
+    <button id="nextButton">Next Question</button>
+  </div>
+</div>
+
+<footer>
+  <p>By signing in, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
+</footer>
+
+<script>
+  const questions = [
+    {
+      question: "What is the largest planet in our Solar System?",
+      options: ["Earth", "Jupiter", "Mars", "Venus"],
+      correctAnswer: "Jupiter"
+    },
+    {
+      question: "Which planet is known as the Red Planet?",
+      options: ["Earth", "Jupiter", "Mars", "Neptune"],
+      correctAnswer: "Mars"
+    },
+    {
+      question: "What galaxy do we live in?",
+      options: ["Andromeda", "Whirlpool", "Milky Way", "Sombrero"],
+      correctAnswer: "Milky Way"
+    },
+    {
+      question: "Which planet has the most moons?",
+      options: ["Jupiter", "Saturn", "Mars", "Neptune"],
+      correctAnswer: "Saturn"
+    },
+    {
+      question: "What is the hottest planet in the Solar System?",
+      options: ["Mercury", "Venus", "Mars", "Jupiter"],
+      correctAnswer: "Venus"
+    },
+    {
+      question: "Which planet is farthest from the Sun?",
+      options: ["Uranus", "Saturn", "Neptune", "Pluto"],
+      correctAnswer: "Neptune"
+    },
+    {
+      question: "What is the name of our Sun's galaxy cluster?",
+      options: ["Local Group", "Virgo Cluster", "Orion Arm", "Coma Cluster"],
+      correctAnswer: "Local Group"
+    },
+    {
+      question: "How long does Earth take to orbit the Sun?",
+      options: ["24 hours", "365 days", "30 days", "12 months"],
+      correctAnswer: "365 days"
+    },
+    {
+      question: "What is the closest star to Earth?",
+      options: ["Proxima Centauri", "Alpha Centauri", "Sirius", "Sun"],
+      correctAnswer: "Sun"
+    },
+    {
+      question: "What object is at the center of our solar system?",
+      options: ["Moon", "Earth", "Sun", "Jupiter"],
+      correctAnswer: "Sun"
+    }
+  ];
+
+  let currentQuestion = 0;
+  let timer = 30;
+  let timerInterval;
+  let userAnswers = [];
+  let score = 0;
+
+  const questionElement = document.getElementById('question');
+  const optionsContainer = document.getElementById('options');
+  const progressElement = document.getElementById('progress');
+  const timerElement = document.getElementById('timer');
+
+  function loadQuestion() {
+    const q = questions[currentQuestion];
+    questionElement.textContent = `Question ${currentQuestion + 1}: ${q.question}`;
+    progressElement.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+    
+    optionsContainer.innerHTML = "";
+    q.options.forEach((option, index) => {
+      const label = document.createElement("label");
+      label.classList.add("option");
+      label.innerHTML = `<input type="radio" name="option" value="${option}"> ${option}`;
+      optionsContainer.appendChild(label);
+    });
+  }
+
+  function startTimer() {
+    timer = 30;
+    timerElement.textContent = timer;
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      if (timer > 0) {
+        timer--;
+        timerElement.textContent = timer;
+      } else {
+        clearInterval(timerInterval);
+        handleTimeOut();
+      }
+    }, 1000);
+  }
+
+  function handleTimeOut() {
+    const currentQ = questions[currentQuestion];
+    userAnswers.push({
+      question: currentQ.question,
+      selectedAnswer: "Time expired",
+      correctAnswer: currentQ.correctAnswer,
+      isCorrect: false
+    });
+    
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      loadQuestion();
+      startTimer();
+    } else {
+      finishQuiz();
+    }
+  }
+
+  function finishQuiz() {
+    // Calculate final score
+    score = userAnswers.filter(answer => answer.isCorrect).length;
+    
+    // Prepare results data
+    const quizResults = {
+      score: score,
+      totalQuestions: questions.length,
+      userAnswers: userAnswers
+    };
+    
+    // Store results in localStorage
+    localStorage.setItem('astronomyQuizResults', JSON.stringify(quizResults));
+    
+    // Redirect to results page
+    window.location.href = "results.html";
+  }
+
+  document.getElementById('nextButton').addEventListener('click', () => {
+    const selectedOption = document.querySelector('input[name="option"]:checked');
+    if (!selectedOption) {
+      alert("Please select an answer before continuing.");
+      return;
+    }
+
+    const currentQ = questions[currentQuestion];
+    const isCorrect = selectedOption.value === currentQ.correctAnswer;
+    
+    if (isCorrect) {
+      score++;
+    }
+
+    userAnswers.push({
+      question: currentQ.question,
+      selectedAnswer: selectedOption.value,
+      correctAnswer: currentQ.correctAnswer,
+      isCorrect: isCorrect
+    });
+
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      loadQuestion();
+      startTimer();
+    } else {
+      clearInterval(timerInterval);
+      finishQuiz();
+    }
+  });
+
+  // Initialize quiz
+  loadQuestion();
+  startTimer();
+</script>
+
+</body>
+</html>

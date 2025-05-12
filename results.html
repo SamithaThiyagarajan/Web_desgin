@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #101010;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0;
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #ff7b00;
+      border-bottom: 1px solid #333;
+    }
+
+    .results-container {
+      padding: 40px;
+      flex: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .score {
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ff7b00;
+    }
+
+    .answers-list {
+      margin-bottom: 30px;
+    }
+
+    .answer-item {
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: #1a1a1a;
+      border-radius: 5px;
+    }
+
+    .question-text {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+    }
+
+    .selected-answer {
+      color: #ff6b6b;
+      margin-bottom: 8px;
+    }
+
+    .correct-answer {
+      color: #4ecdc4;
+    }
+
+    .correct {
+      color: #4ecdc4 !important;
+    }
+
+    .buttons-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    button {
+      padding: 15px 25px;
+      background-color: #ff7b00;
+      color: #fff;
+      font-size: 1.1em;
+      border: none;
+      cursor: pointer;
+      flex: 1;
+      transition: background-color 0.3s ease;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #f58600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #aaa;
+      background-color: #101010;
+      margin-top: auto;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #ff7b00;
+    }
+  </style>
+</head>
+<body>
+
+<header>Quiz Results</header>
+
+<div class="results-container">
+  <div class="score" id="score"></div>
+
+  <div class="answers-list" id="answersList"></div>
+
+  <div class="buttons-container">
+    <button onclick="window.location.href='quiz.html'">Retake Quiz</button>
+    <button onclick="window.location.href='index.html'">Go to Homepage</button>
+  </div>
+</div>
+
+<footer>
+  <p>By signing in, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
+</footer>
+
+<script>
+  // Retrieve quiz results from localStorage
+  const results = JSON.parse(localStorage.getItem('astronomyQuizResults'));
+  
+  if (!results) {
+    alert("No results found. Please take the quiz first.");
+    window.location.href = "quiz.html";
+  } else {
+    // Display score
+    document.getElementById('score').textContent = `Your Score: ${results.score} out of ${results.totalQuestions}`;
+    
+    // Display each question and answer
+    const answersList = document.getElementById('answersList');
+    
+    results.userAnswers.forEach((answer, index) => {
+      const answerItem = document.createElement('div');
+      answerItem.className = 'answer-item';
+      
+      const questionText = document.createElement('div');
+      questionText.className = 'question-text';
+      questionText.textContent = `${index + 1}. ${answer.question}`;
+      
+      const selectedAnswer = document.createElement('div');
+      selectedAnswer.className = `selected-answer ${answer.isCorrect ? 'correct' : ''}`;
+      selectedAnswer.textContent = `Your answer: ${answer.selectedAnswer}`;
+      
+      const correctAnswer = document.createElement('div');
+      correctAnswer.className = 'correct-answer';
+      correctAnswer.textContent = `Correct answer: ${answer.correctAnswer}`;
+      
+      answerItem.appendChild(questionText);
+      answerItem.appendChild(selectedAnswer);
+      
+      // Only show correct answer if user was wrong
+      if (!answer.isCorrect) {
+        answerItem.appendChild(correctAnswer);
+      }
+      
+      answersList.appendChild(answerItem);
+    });
+  }
+</script>
+
+</body>
+</html>
