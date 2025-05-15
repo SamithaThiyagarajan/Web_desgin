@@ -146,3 +146,32 @@ window.addEventListener("DOMContentLoaded", () => {
   createBookmarkUI();
   scrollToBookmarkIfPresent();
 });
+function createLoginLink() {
+  const loginLink = document.createElement("a");
+  loginLink.href = "auth.html";
+  loginLink.textContent = "Login | Sign Up";
+  loginLink.style.position = "fixed";
+  loginLink.style.top = "20px";
+  loginLink.style.right = "200px"; // moved more left from bookmark toggle at 20px
+  loginLink.style.color = "white";
+  loginLink.style.background = "black";
+  loginLink.style.border = "2px solid white";
+  loginLink.style.padding = "10px 16px";
+  loginLink.style.fontFamily = "'Orbitron', sans-serif";
+  loginLink.style.fontWeight = "bold";
+  loginLink.style.textDecoration = "none";
+  loginLink.style.borderRadius = "8px";
+  loginLink.style.zIndex = "9999";
+  loginLink.style.cursor = "pointer";
+
+  // Optional: Save current page so auth can redirect back
+  loginLink.onclick = () => {
+    localStorage.setItem("returnTo", window.location.pathname);
+  };
+
+  document.body.appendChild(loginLink);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  createLoginLink();
+});
