@@ -12,8 +12,8 @@
       body {
         margin: 0;
         font-family: "Orbitron", sans-serif;
-        background: #000000; /* Dark background for space theme */
-        color: #ffffff; /* White text */
+        background: #000000;
+        color: #ffffff;
         overflow-x: hidden;
       }
 
@@ -43,13 +43,15 @@
       }
 
       nav {
-        background-color: #1d1d1d; /* Dark navigation bar */
+        background-color: #1d1d1d;
         display: flex;
         justify-content: center;
         padding: 15px 0;
         position: sticky;
         top: 0;
         z-index: 1000;
+        flex-wrap: wrap;
+        gap: 10px;
       }
 
       nav a {
@@ -63,7 +65,7 @@
       }
 
       nav a:hover {
-        color: #f2f2f2; /* Lighter text on hover */
+        color: #f2f2f2;
       }
 
       .main-content {
@@ -82,15 +84,15 @@
         width: 100%;
         height: 500px;
         border-radius: 12px;
-        border: 2px solid #ffffff; /* White border for the viewer */
+        border: 2px solid #ffffff;
         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
       }
 
       .events-section {
         flex: 3;
         padding: 50px;
-        background-color: #1d1d1d; /* Dark gray for the events box */
-        color: #ffffff; /* White text */
+        background-color: #1d1d1d;
+        color: #ffffff;
         border-radius: 10px;
         box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.5);
       }
@@ -103,36 +105,36 @@
       }
 
       .event-card {
-        background-color: #121212; /* Very dark gray for cards */
+        background-color: #121212;
         padding: 25px;
         border-radius: 10px;
         margin-bottom: 20px;
-        border: 1px solid #333333; /* Subtle border for the cards */
+        border: 1px solid #333333;
         transition: transform 0.3s ease, border-color 0.3s ease;
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
       }
 
       .event-card:hover {
         transform: translateY(-5px);
-        border-color: #ffffff; /* White border on hover */
+        border-color: #ffffff;
         box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
       }
 
       .event-card h4 {
-        color: #ffffff; /* White heading for the events */
+        color: #ffffff;
         margin-bottom: 15px;
         font-size: 1.8em;
         font-weight: bold;
       }
 
       .event-card p {
-        color: #bbbbbb; /* Lighter text for event descriptions */
+        color: #bbbbbb;
         font-size: 1.1em;
         line-height: 1.6;
       }
 
       .footer {
-        background-color: #000000; /* Black footer */
+        background-color: #000000;
         color: #ffffff;
         text-align: center;
         padding: 30px 15px;
@@ -148,17 +150,16 @@
     </header>
 
     <nav>
-      <a href="#">Home</a>
+      <a href="text.html">Home</a>
       <a href="constellations.html">Constellations</a>
       <a href="planets.html">Planets</a>
       <a href="quiz.html">Quizzes</a>
-      <a href="#">Events</a>
+      <a href="events.html">Events</a>
       <a href="#">Resources</a>
+      <a href="auth.html" onclick="setReturnPage()">Login | Sign Up</a>
     </nav>
 
-    <!-- Main Content Section -->
     <section class="main-content">
-      <!-- Left Content - 3D Solar System Viewer -->
       <div class="left-content">
         <h2>Interactive Solar System Viewer</h2>
         <iframe
@@ -167,46 +168,38 @@
         ></iframe>
       </div>
 
-      <!-- Right Content - Today's Events -->
       <div class="events-section">
         <h2>Today's Astronomical Events</h2>
 
-        <!-- Event 1 -->
         <div class="event-card">
           <h4>Solar Eclipse</h4>
           <p>
-            There will be a partial solar eclipse visible in parts of Europe and
-            Africa today. The eclipse will reach its peak at 12:30 PM UTC.
+            A partial solar eclipse is visible in parts of Europe and Africa
+            today. Peak at 12:30 PM UTC.
           </p>
         </div>
 
-        <!-- Event 2 -->
         <div class="event-card">
           <h4>Meteor Shower</h4>
           <p>
-            The Perseids meteor shower will peak tonight, offering a stunning
-            display of shooting stars. The best viewing time will be between
-            midnight and dawn.
+            The Perseids meteor shower peaks tonight. Watch between midnight and
+            dawn.
           </p>
         </div>
 
-        <!-- Event 3 -->
         <div class="event-card">
           <h4>Planetary Conjunction</h4>
           <p>
-            A rare alignment of Jupiter and Saturn will be visible just after
-            sunset in the western sky. The planets will appear very close to
-            each other.
+            Jupiter and Saturn align tonight just after sunset in the western
+            sky.
           </p>
         </div>
 
-        <!-- Event 4 -->
         <div class="event-card">
           <h4>Comet Observation</h4>
           <p>
-            Comet C/2023 T2 will be visible in the night sky. Bring your
-            telescope for a closer look at this icy traveler from the outer
-            solar system.
+            Comet C/2023 T2 is visible tonight. Bring a telescope for a closer
+            view.
           </p>
         </div>
       </div>
@@ -215,6 +208,12 @@
     <div class="footer">
       &copy; 2025 Astronomy Learning Platform — Powered by curiosity and space.
     </div>
+
+    <script>
+      function setReturnPage() {
+        localStorage.setItem("returnTo", window.location.pathname);
+      }
+    </script>
     <script src="sale.js"></script>
     <script src="bookmark.js"></script>
   </body>
