@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Events - Astronomy Learning Platform</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Base Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Orbitron", sans-serif;
+        background: radial-gradient(circle at top, #0b0f1a, #000);
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      header {
+        background: #111;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 1rem;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: #00bfff;
+      }
+
+      .bookmark-box {
+        background: transparent;
+        border: 1px solid #ccc;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        cursor: pointer;
+        color: #fff;
+        transition: 0.3s;
+      }
+
+      .bookmark-box:hover {
+        background: #00bfff33;
+        border-color: #00bfff;
+      }
+
+      .events-container {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        background: linear-gradient(90deg, #00bfff, #7f00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .event-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        width: 90%;
+        max-width: 700px;
+        margin: 1rem 0;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeInUp 1s ease forwards;
+        opacity: 0;
+      }
+
+      .event-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .event-card:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      .event-card:nth-child(4) {
+        animation-delay: 0.6s;
+      }
+
+      .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 30px rgba(0, 191, 255, 0.4);
+      }
+
+      .event-card h2 {
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+      }
+
+      .event-card p {
+        color: #ddd;
+        line-height: 1.6;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="text.html">HOME</a>
+        <a href="constellations.html">CONSTELLATIONS</a>
+        <a href="planets.html">PLANETS</a>
+        <a href="quizzes.html">QUIZZES</a>
+        <a href="events.html">EVENTS</a>
+        <a href="resources.html">RESOURCES</a>
+      </nav>
+      <button class="bookmark-box">My Bookmarks</button>
+    </header>
+
+    <main class="events-container">
+      <h1>Astronomy Events 2025</h1>
+
+      <div class="event-card">
+        <h2>🌠 Perseid Meteor Shower</h2>
+        <p><strong>Date:</strong> August 12–13, 2025</p>
+        <p>
+          <strong>Visibility:</strong> Northern Hemisphere, especially in dark
+          rural areas.
+        </p>
+        <p>
+          One of the most active and reliable meteor showers, producing up to
+          100 meteors per hour. Best viewed after midnight under clear, dark
+          skies.
+        </p>
+      </div>
+
+      <div class="event-card">
+        <h2>🌕 Total Lunar Eclipse</h2>
+        <p><strong>Date:</strong> September 7, 2025</p>
+        <p>
+          <strong>Visibility:</strong> Europe, Africa, Asia, and parts of
+          Australia.
+        </p>
+        <p>
+          The Moon will pass completely through Earth’s shadow, taking on a
+          dramatic red hue. Great opportunity for night photographers and
+          skywatchers.
+        </p>
+      </div>
+
+      <div class="event-card">
+        <h2>🌞 Partial Solar Eclipse</h2>
+        <p><strong>Date:</strong> October 29, 2025</p>
+        <p>
+          <strong>Visibility:</strong> Parts of North America, Central America,
+          and western South America.
+        </p>
+        <p>
+          A partial eclipse where the Moon covers a portion of the Sun. Always
+          use certified eclipse glasses for safe viewing!
+        </p>
+      </div>
+
+      <div class="event-card">
+        <h2>🌌 Orionid Meteor Shower</h2>
+        <p><strong>Date:</strong> October 21–22, 2025</p>
+        <p><strong>Visibility:</strong> Worldwide in both hemispheres.</p>
+        <p>
+          The Orionids are fast meteors with occasional fireballs. They
+          originate from Halley’s Comet and appear to radiate from the Orion
+          constellation.
+        </p>
+      </div>
+
+      <div class="event-card">
+        <h2>🪐 Jupiter at Opposition</h2>
+        <p><strong>Date:</strong> November 3, 2025</p>
+        <p>
+          <strong>Visibility:</strong> Best viewed around midnight from anywhere
+          with a clear sky.
+        </p>
+        <p>
+          Jupiter will be directly opposite the Sun in our sky — the brightest
+          and closest it gets all year. Use a telescope to see its cloud bands
+          and moons!
+        </p>
+      </div>
+
+      <div class="event-card">
+        <h2>🔭 James Webb Anniversary</h2>
+        <p><strong>Date:</strong> December 25, 2025</p>
+        <p><strong>Visibility:</strong> Global (virtual celebration)</p>
+        <p>
+          Celebrate the launch anniversary of NASA’s most powerful space
+          telescope. Expect new images, public talks, and media from NASA and
+          partners.
+        </p>
+      </div>
+    </main>
+
+    <script>
+      // Bookmark creation
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        const scrollY = window.scrollY;
+        const page = location.pathname.split("/").pop();
+        const bookmark = { page, scrollY };
+        let bookmarks = JSON.parse(
+          localStorage.getItem("astroBookmarks") || "[]"
+        );
+        bookmarks.push(bookmark);
+        localStorage.setItem("astroBookmarks", JSON.stringify(bookmarks));
+        alert("🔖 Bookmark added!");
+      });
+
+      // Reveal cards on load
+      window.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".event-card").forEach((card) => {
+          card.style.opacity = "1";
+        });
+      });
+    </script>
+    <script src="sale.js"></script>
+    <script src="bookmark.js"></script>
+  </body>
+</html>
